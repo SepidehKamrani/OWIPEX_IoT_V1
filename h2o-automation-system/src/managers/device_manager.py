@@ -42,3 +42,11 @@ if __name__ == '__main__':
     radar_sensor = manager.get_device(1)
     turbidity_sensor = manager.get_device(2)
     ph_sensor = manager.get_device(3)
+
+    # Testen Sie jedes Gerät und geben Sie die Ergebnisse aus
+    for device_id in manager.devices:
+        device = manager.get_device(device_id)
+        print(f"Testing device {device_id}")
+        for reg in manager.config['devices'][device_id]['registers']:
+            result = device.read_register(reg['address'], reg['length'], reg['format'])
+            print(f"Read from {reg['name']}: {result}")
