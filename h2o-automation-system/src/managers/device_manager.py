@@ -14,9 +14,9 @@ class DeviceManager:
             return json.load(file)
 
     def init_devices(self):
-        for device_config in self.config['devices']:
-            device_id = device_config['device_id']
-            self.devices[device_id] = ModbusClient(**device_config)
+        for device_id, device_config in self.config['devices'].items():
+            # Fügen Sie self als device_manager hinzu
+            self.devices[device_id] = ModbusClient(self, device_id, **device_config)
 
     def get_device(self, device_id):
         return self.devices.get(device_id)
