@@ -43,10 +43,9 @@ if __name__ == '__main__':
     turbidity_sensor = manager.get_device(2)
     ph_sensor = manager.get_device(3)
 
-    # Testen Sie jedes Gerät und geben Sie die Ergebnisse aus
     for device_id in manager.devices:
         device = manager.get_device(device_id)
         print(f"Testing device {device_id}")
-        for reg in manager.config['devices'][device_id]['registers']:
+        for reg in manager.config['devices'][device_id - 1]['registers']:  # Indexierung sollte 0-basiert sein
             result = device.read_register(reg['address'], reg['length'], reg['format'])
             print(f"Read from {reg['name']}: {result}")
