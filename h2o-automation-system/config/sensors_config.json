@@ -1,0 +1,63 @@
+{
+    "modbus_port": "/dev/ttymxc3",
+    "modbus_baudrate": 9600,
+    "modbus_parity": "N",
+    "modbus_stopbits": 1,
+    "modbus_bytesize": 8,
+    "modbus_timeout": 1,
+    "devices": [
+      {
+        "device_id": 1,
+        "type": "radar_sensor",
+        "registers": [
+          {
+            "name": "Radar Level",
+            "address": 1,
+            "length": 1,
+            "format": ">H",
+            "poll_interval": 10
+          }
+        ]
+      },
+      {
+        "device_id": 2,
+        "type": "standard_sensor",
+        "registers": [
+          {
+            "name": "Turbidity",
+            "address": 1,
+            "length": 2,
+            "format": ">f",
+            "poll_interval": 10
+          },
+          {
+            "name": "Temperature Turbidity",
+            "address": 3,
+            "length": 2,
+            "format": ">f",
+            "poll_interval": 10
+          }
+        ]
+      },
+      {
+        "device_id": 3,
+        "registers": [
+          {
+            "name": "pH Value",
+            "address": 1,
+            "length": 2,
+            "format": ">f",
+            "poll_interval": 10
+          },
+          {
+            "name": "Temperature pH",
+            "address": 3,
+            "length": 2,
+            "format": ">f",
+            "poll_interval": 10
+          }
+        ]
+      }
+    ]
+  }
+  
