@@ -37,7 +37,7 @@ class DeviceManager:
 
 # Beispiel für die Verwendung des DeviceManagers
 if __name__ == '__main__':
-    config_path = 'path/to/your/sensors_config.json'
+    config_path = '../../config/sensors_config.json'
     manager = DeviceManager(config_path)
     radar_sensor = manager.get_device(1)
     turbidity_sensor = manager.get_device(2)
