@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../libs')  # Fügt das Verzeichnis libs zum PYTHONPATH hinzu
 import json
 from modbus_lib import ModbusClient
 
@@ -12,15 +14,16 @@ class DeviceManager:
             return json.load(file)
 
     def init_devices(self):
-        for device_id, settings in self.config['devices'].items():
-            self.devices[device_id] = ModbusClient(**settings)
+        for device_config in self.config['devices']:
+            device_id = device_config['device_id']
+            self.devices[device_id] = ModbusClient(**device_config)
 
     def get_device(self, device_id):
         return self.devices.get(device_id)
 
 # Beispiel für die Verwendung des DeviceManagers
 if __name__ == '__main__':
-    config_path = 'path/to/your/sensors_config.json'
+    config_path = '../../config/sensors_config.json'
     manager = DeviceManager(config_path)
     radar_sensor = manager.get_device('radar_sensor')
     turbidity_sensor = manager.get_device('turbidity_sensor')
