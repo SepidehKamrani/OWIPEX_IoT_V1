@@ -14,17 +14,31 @@ class DeviceManager:
             return json.load(file)
 
     def init_devices(self):
-        for device_id, device_config in self.config['devices'].items():
-            # Fügen Sie self als device_manager hinzu
-            self.devices[device_id] = ModbusClient(self, device_id, **device_config)
+        modbus_config = {
+            'port': self.config['modbus_port'],
+            'baudrate': self.config['modbus_baudrate'],
+            'parity': self.config['modbus_parity'],
+            'stopbits': self.config['modbus_stopbits'],
+            'bytesize': self.config['modbus_bytesize'],
+            'timeout': self.config['modbus_timeout']
+        }
+
+        for device_config in self.config['devices']:
+            device_id = device_config['device_id']
+            self.devices[device_id] = ModbusClient(self, device_id, **modbus_config)
+
+            for register in device_config['registers']:
+                # Hier können Sie Logik hinzufügen, um die Registerkonfigurationen zu verarbeiten.
+                # Zum Beispiel könnten Sie diese Informationen nutzen, um Polling-Intervalle zu planen.
+                pass
 
     def get_device(self, device_id):
         return self.devices.get(device_id)
 
 # Beispiel für die Verwendung des DeviceManagers
 if __name__ == '__main__':
-    config_path = '../../config/sensors_config.json'
+    config_path = 'path/to/your/sensors_config.json'
     manager = DeviceManager(config_path)
-    radar_sensor = manager.get_device('radar_sensor')
-    turbidity_sensor = manager.get_device('turbidity_sensor')
-    ph_sensor = manager.get_device('ph_sensor')
+    radar_sensor = manager.get_device(1)
+    turbidity_sensor = manager.get_device(2)
+    ph_sensor = manager.get_device(3)
