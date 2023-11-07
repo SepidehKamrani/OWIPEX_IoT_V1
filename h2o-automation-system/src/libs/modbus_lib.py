@@ -6,9 +6,11 @@ from threading import Thread
 from time import sleep
 
 class ModbusClient:
-    def __init__(self, device_manager, device_id):
+    def __init__(self, device_manager, device_id, **kwargs):
         self.device_manager = device_manager
         self.device_id = device_id
+        # Hier könnten Sie mit den zusätzlichen kwargs arbeiten, z.B. sie speichern oder verarbeiten
+        self.additional_settings = kwargs
         self.auto_read_enabled = False
 
     def read_register(self, start_address, register_count, data_format='>f'):
