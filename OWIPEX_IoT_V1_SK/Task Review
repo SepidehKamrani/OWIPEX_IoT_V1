@@ -1,0 +1,126 @@
+Project Overview:
+The project is an ambitious endeavor to overhaul a comprehensive monolithic industrial IoT system used for water treatment monitoring. This system's interaction with the Thingsboard IoT platform encompasses a wide range of functionalities, including sensor data acquisition, actuator control, and data telemetry.
+
+Current System Structure:
+
+The system's backbone is a single, extensive Python script (h2o.py).
+Global variables are extensively used, posing challenges for configuration and state management.
+Sensor and actuator integration is hardcoded, limiting flexibility.
+Data is sent to Thingsboard at fixed intervals, which could be optimized to reduce network load.
+Sensor communication is handled through a custom Modbus library over RS485, which is to be standardized.
+Refactoring Goals:
+
+Modularization: Split the codebase into discrete, logical units for better maintenance and future growth.
+Optimization: Enhance data transmission efficiency with intelligent scheduling and refine task scheduling mechanisms.
+Architecture Enhancement: Develop a unified configuration management system and a scalable framework for device management.
+Responsibilities:
+
+Analyze the existing codebase to identify areas for improvement.
+Design and implement a modular structure to segregate functionalities.
+Create a centralized configuration management system to replace global variables.
+Develop an extensible framework for device integration, allowing for straightforward addition of new devices.
+Update the Modbus library to ensure it is robust and adheres to standard communication protocols.
+Produce thorough documentation to support ongoing and future development efforts.
+Implementation Steps:
+
+Code Modularization: Disassemble the current script into modules with defined responsibilities.
+Error Handling Improvement: Incorporate comprehensive exception handling to enhance system reliability.
+Configuration Management Enhancement: Develop a system to centrally manage configuration settings, eliminating the reliance on global variables.
+System Calls Optimization: Evaluate and implement Python libraries for more efficient system and sensor operations.
+Thingsboard Synchronization: Integrate direct synchronization with Thingsboard within the configuration system.
+Code Review and Refactoring: Perform an in-depth code review to refine and optimize post-improvement.
+Testing: Establish a robust testing framework to ensure system integrity and operability.
+Additional Considerations:
+
+Move away from using State.json by leveraging real-time synchronization with Thingsboard.
+Devise a strategy for data collection and device integration that eases the addition of new devices and sensors.
+Utilize the pre-existing PostgreSQL database for organized sensor data storage.
+Introduce configurable timing for sensor readings to offer flexibility and reduce unnecessary data transmission.
+Documentation:
+
+Code Documentation: Provide detailed comments within the code for clarity and to facilitate understanding.
+User Guide: Offer comprehensive instructions for system setup, deployment, and usage.
+Developer Guide: Outline the system architecture and extendibility options for adding new functionalities.
+
+Restructure the primary GitHub repository for the IoT system refactoring project:
+/
+|-- thingsboard_client/
+|   |-- __init__.py
+|   |-- thingsboard_client.py
+
+|-- device_manager/
+|   |-- __init__.py
+|   |-- device_interface.py
+|   |-- device_manager.py
+|   |-- modbus_lib.py
+|   |-- radar_sensor.py
+|   |-- turbidity_sensor.py
+|   |-- ph_sensor.py
+
+|-- state_manager/
+|   |-- __init__.py
+|   |-- state_manager.py
+|   |-- config_loader.py
+
+|-- handlers/
+|   |-- __init__.py
+|   |-- gps_handler.py
+|   |-- flow_calculation_handler.py
+
+|-- models/
+|   |-- __init__.py
+|   |-- sensor.py
+|   |-- actuator.py
+
+|-- utilities/
+|   |-- __init__.py
+|   |-- runtime_tracker.py
+
+|-- main/
+|   |-- __init__.py
+|   |-- main.py
+
+|-- tests/
+|   |-- __init__.py
+|   |-- test_device_manager.py
+|   |-- test_state_manager.py
+|   |-- test_thingsboard_client.py
+
+|-- docs/
+|   |-- README.md
+|   |-- user_guide.md
+|   |-- developer_guide.md
+
+|-- scripts/
+|   |-- __init__.py
+|   |-- calibration_data.json
+|   |-- start_script.sh
+|   |-- edge_setup_step_server.sh
+|   |-- setup_step_server.sh
+
+|-- config/
+|   |-- __init__.py
+|   |-- default_config.py
+
+|-- data/
+|   |-- __init__.py
+|   |-- state.json
+
+|-- hardware_interface/
+|   |-- __init__.py
+|   |-- gpiocontrol.py (Controls GPIO on a Linux system)
+|   |-- GPIOExample.py (Example script using GPIOControl)
+
+|-- deployment/
+|   |-- __init__.py
+|   |-- edge_setup_step_server.sh
+|   |-- setup_step_server.sh
+
+|-- calibration/
+|   |-- __init__.py
+|   |-- calibration_data.json
+
+|-- backup/
+    |-- __init__.py
+    |-- gpio.py (Interacts with GPIO using ThingsBoard and MQTT)
+    |-- test_modbus_copy.py (Test script for Modbus communication)
