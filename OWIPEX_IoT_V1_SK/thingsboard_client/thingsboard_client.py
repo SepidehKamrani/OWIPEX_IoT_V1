@@ -104,8 +104,8 @@ class ThingsBoardClient:
 
 # Example usage
 if __name__ == '__main__':
-    ACCESS_TOKEN = "YOUR_ACCESS_TOKEN"
-    THINGSBOARD_HOST = "demo.thingsboard.io"
+    ACCESS_TOKEN = "TPsr3pqr2gZj1IkhCecL"
+    THINGSBOARD_HOST = "portal.owipex.io"
 
     tb_client = ThingsBoardClient(THINGSBOARD_HOST, ACCESS_TOKEN)
     tb_client.connect()
